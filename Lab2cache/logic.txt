@@ -1,0 +1,41 @@
+
+10 read hit
+根据下标找到set,循环看这个set里面所有block的valid值，如果valid,就看tag值，如果相等，就返回数据。没有任何数据会被改动。
+
+21 L1 read miss L2 read hit
+L1中相应set没有找到对应的block。根据相同的方法发现L2中有相应的block。这个时候L2会返回这个数据。
+在写入L1的某一个block时，通过检查set的emptyWay写入下标最小的空way。即改valid，写入tag，emptyWay自增。
+如果这个emptyWay是W，说明这个set已经满了，首先需要检查counter把这个block evict/update：
+	如果不是dirty,则要更新。更新tag值和将dirty置零，counter自增。
+	如果是dirty bit则evict，需要把这个block写到L2中。然后把L2传来的数据更新到L1的block中，即更新tag值和将dirty置零。counter自增。
+	（L2 write）
+		如果L2是write hit，那么L2相应的block的dirty bit需要更新一下，其他不用管。
+		如果L2是write miss，那么L2什么也不用做。
+	
+
+22 L1 read miss L2 read miss
+L1中相应set没有找到对应的block。根据相同的方法发现L2中没有相应的block。
+这个时候L2会先把数据写到这个set里面，然后返回L1这个数据。
+	(write)如果对应set没满，就写到emptyWay里面，即更新tag值和dirty bit，emptyWay自增。
+	(evict)如果emptyWay是W，那么就要根据counter更新这个block的tag值并且将dirty bit置零。
+
+在写入L1的某一个block时，通过检查set的emptyWay写入下标最小的空way。即改valid，写入tag，emptyWay自增。
+如果这个emptyWay是W，说明这个set已经满了，首先需要检查counter把这个block evict/update：
+	如果不是dirty,则要更新。更新tag值和将dirty置零，counter自增。
+	如果是dirty bit则evict，需要把这个block写到L2中。然后把L2传来的数据更新到L1的block中，即更新tag值和将dirty置零。counter自增。
+	（L2 write）
+		如果L2是write hit，那么L2相应的block的dirty bit需要更新一下，其他不用管。
+		如果L2是write miss，那么L2什么也不用做。
+
+30 L1 write hit
+	更新L1的dirty bit就行。
+
+43 L1 write miss L2 write hit
+	检查发现L1中没有。L1什么都不用做。
+	L2中有，更新dirty bit就行。
+
+44 L1 write miss L2 write miss
+	检查发现，两个都miss。
+	L1什么也不用做，L2也什么都不用做。
+
+由于不需要dirty bit。30、43和44都没有需要实际更改的数据。

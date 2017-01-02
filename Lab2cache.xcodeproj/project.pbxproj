@@ -23,8 +23,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		900142D21DF4F2EB00944640 /* trace.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = trace.txt; sourceTree = "<group>"; };
+		900142D31DF4F35D00944640 /* sytraceout.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = sytraceout.txt; path = ../../../Downloads/sytraceout.txt; sourceTree = "<group>"; };
+		900142D41DF4F39F00944640 /* traceout.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = traceout.txt; sourceTree = "<group>"; };
 		9081FB301DEA928E00FCF3E8 /* Lab2cache */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab2cache; sourceTree = BUILT_PRODUCTS_DIR; };
-		9081FB331DEA928E00FCF3E8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9081FB331DEA928E00FCF3E8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,9 @@
 		9081FB321DEA928E00FCF3E8 /* Lab2cache */ = {
 			isa = PBXGroup;
 			children = (
+				900142D21DF4F2EB00944640 /* trace.txt */,
+				900142D31DF4F35D00944640 /* sytraceout.txt */,
+				900142D41DF4F39F00944640 /* traceout.txt */,
 				9081FB331DEA928E00FCF3E8 /* main.cpp */,
 			);
 			path = Lab2cache;
@@ -246,6 +252,7 @@
 				9081FB391DEA928E00FCF3E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
